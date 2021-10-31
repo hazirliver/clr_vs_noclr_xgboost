@@ -63,18 +63,18 @@ model <- xgboost(data = as.matrix(mpa_meta_nh_train[2:(ncol(mpa_meta_nh_train) -
                   nthread = 8, nrounds = best_iteration, objective = "binary:logistic")
 
 # Предсказание
-pred2 <- predict(model, as.matrix(mpa_meta_nh_test[2:(ncol(mpa_meta_nh_test) - 1)]))
+pred <- predict(model, as.matrix(mpa_meta_nh_test[2:(ncol(mpa_meta_nh_test) - 1)]))
 
 predicted_values <- data.frame(true_labels = mpa_meta_nh_test$Response,
-                               predicted_values = if_else(pred2 < 0.5, "NR", "R"))
+                               predicted_values = if_else(pred < 0.5, "NR", "R"))
 
 
 # Анализ предсказания ----
-# Считаем ошибку предсказания (Accuracy)
+# Считаем ошибку предсказания (error rate)
 sum(predicted_values$true_labels != predicted_values$predicted_values) / nrow(predicted_values)
 
 # Считаем AUC
-xgb.roc_obj <- roc(mpa_meta_nh_test$labels_Response, pred2)
+xgb.roc_obj <- roc(mpa_meta_nh$labels_Response, pred)
 auc(xgb.roc_obj)
 
 

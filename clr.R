@@ -72,7 +72,7 @@ predicted_values_clr <- data.frame(true_labels = mpa_meta_nh_clr_test$Response,
                                    predicted_values = if_else(pred2_clr < 0.5, "NR", "R"))
 
 # Анализ предсказания ----
-# Считаем ошибку предсказания (Accuracy)
+# Считаем ошибку предсказания (error rate)
 sum(predicted_values_clr$true_labels != predicted_values_clr$predicted_values) / nrow(predicted_values_clr)
 
 # Считаем AUC
