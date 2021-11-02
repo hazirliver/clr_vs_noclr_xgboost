@@ -54,7 +54,7 @@ fit_predict <- function(mpa_meta_nh, param)
   xgb.train.data <- xgb.DMatrix(data.matrix(mpa_meta_nh_train[2:(ncol(mpa_meta_nh_train) - 1)]),
                                 label = mpa_meta_nh_train$labels_Response, missing = NA)
 
-  xgb.test.data <- xgb.DMatrix(data.matrix(mpa_meta_nh_test[2:(ncol(mpa_meta_nh_train) - 1)]),
+  xgb.test.data <- xgb.DMatrix(data.matrix(mpa_meta_nh_test[2:(ncol(mpa_meta_nh_test) - 1)]),
                                label = mpa_meta_nh_test$labels_Response, missing = NA)
 
 
